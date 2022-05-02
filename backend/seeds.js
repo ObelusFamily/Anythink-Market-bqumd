@@ -11,7 +11,7 @@ MongoClient.connect(url, function(err, db) {
     console.log(result[0]);
     const user = result[0];
     const items = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 100; i++) {
       const item = {"title":"title" + randomString(),"description":"description" + randomString(),"image":`https://i.picsum.photos/id/383/200/301.jpg?hmac=TGwwM8PMWk_qJx0gBlfMpy-jSI-Vswo8thS1eH1CEwg`,"tagList":[],"favorited":false,"favoritesCount":0,"seller":user && user._id || randomString(),"slug":randomString()}
       items.push(item);
     }
