@@ -10,7 +10,7 @@ MongoClient.connect(url, function(err, db) {
     if (err || !result) throw err;
     console.log(result[0]);
     const user = result[0];
-    const item = {"title":"title","description":"description","image":"asdasd","tagList":[],"favorited":false,"favoritesCount":0,"seller":user._id,"slug":randomString()}
+    const item = {"title":"title","description":"description","image":"asdasd","tagList":[],"favorited":false,"favoritesCount":0,"seller":user && user._id || randomString(),"slug":randomString()}
     dbo.collection("items").insertOne(item, function(err, res) {
       if (err) throw err;
       console.log(`1 document inserted; ${item.title}; ${item.slug}`);
