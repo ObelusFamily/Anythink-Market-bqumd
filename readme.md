@@ -13,3 +13,10 @@ When implementing a new feature or fixing a bug, please create a new pull reques
 1. `docker-compose up`
 1. go to `localhost:3000/api/ping`
 1. `localhost:3001/register` and register a new user
+
+## adding dummy item
+1. start local env
+1. `docker exec -it anythink-backend bash` in a new terminal tab
+1. cd to backend folder
+1. run `./seed.sh`
+1. open UI on web browser and make sure a new item with title "title" was created
