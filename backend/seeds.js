@@ -14,7 +14,7 @@ MongoClient.connect(url, function(err, db) {
   dbo.collection("users").insertMany(users, (err, res) => {
     if (err) throw err;
 
-    console.log(`X users inserted;`, res);
+    console.log(`X users inserted; \n`, res);
   })
 
   dbo.collection("users").find({}).toArray(function(err, result) {
@@ -28,7 +28,7 @@ MongoClient.connect(url, function(err, db) {
     }
     dbo.collection("items").insertMany(items, function(err, res) {
       if (err) throw err;
-      console.log(`${items.length} document inserted; \n ${items};`);
+      console.log(`${items.length} document inserted; \n`, res);
       db.close();
     });
   });
