@@ -18,7 +18,7 @@ MongoClient.connect(url, async (err, db) => {
   await dbo.collection("users").insertMany(users, async (err, res) => {
     if (err) throw err;
 
-    console.log(`${res.insertedCount} users inserted; \n`, res);
+    console.log(`${res.insertedCount} users inserted; \n`, res.acknowledged, res.insertedCount);
     
     await dbo.collection("users").find({}).toArray(async (err, result) => {
       if (err || !result) throw err;
@@ -33,7 +33,7 @@ MongoClient.connect(url, async (err, db) => {
       }
       await dbo.collection("items").insertMany(items, async (err, res) => {
         if (err) throw err;
-        console.log(`${items.length} document inserted; \n`, res);
+        console.log(`${items.length} document inserted; \n`, res.acknowledged, res.insertedCount);
         
         console.log('Closing connectio; that was fun;');
   
