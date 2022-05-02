@@ -1,15 +1,15 @@
-const e = require('express');
-
 function randomString() {
   return Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5);
 }
+
 const MongoClient = require('mongodb').MongoClient;
-const url = process.env.MONGODB_URI;
+
+const url = process.env.NODE_ENV === 'development' && process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/';
 MongoClient.connect(url, async (err, db) => {
   if (err) throw err;
   const dbo = db.db("admin");
   const users = [];
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 5; i++) {
     const dummyUser = { "role": "user", "username": "iamdror" + randomString(), "email": `iamdror+${randomString()}@gmail.com`, }
     users.push(dummyUser);
   }
@@ -25,7 +25,7 @@ MongoClient.connect(url, async (err, db) => {
       
       console.log('user is: ', JSON.stringify(user));
       const items = [];
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 5; i++) {
         const item = {"title":"title" + randomString(),"description":"description" + randomString(),"image":`https://i.picsum.photos/id/383/200/301.jpg?hmac=TGwwM8PMWk_qJx0gBlfMpy-jSI-Vswo8thS1eH1CEwg`,"tagList":[],"favorited":false,"favoritesCount":0,"seller":user && user._id || randomString(),"slug":randomString()}
         items.push(item);
       }
