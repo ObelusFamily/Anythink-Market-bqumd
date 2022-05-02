@@ -33,10 +33,11 @@ MongoClient.connect(url, async (err, db) => {
     await dbo.collection("items").insertMany(items, async (err, res) => {
       if (err) throw err;
       console.log(`${items.length} document inserted; \n`, res);
+      
+      console.log('Closing connectio; that was fun;');
+      db.close();
     });
     
-    console.log('Closing connectio; that was fun;');
-    db.close();
   });
   
 });
