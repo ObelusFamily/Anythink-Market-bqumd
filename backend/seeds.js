@@ -6,6 +6,17 @@ const url = process.env.MONGODB_URI;
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   const dbo = db.db("admin");
+  const users = [];
+  for (let i = 0; i < 10; i++) {
+    const dummyUser = { "role": "user", "username": "iamdror" + randomString(), "email": `iamdror+${randomString()}@gmail.com`, }
+    users.push(dummyUser);
+  }
+  dbo.collection("users").insertMany(users, (err, res) => {
+    if (err) throw err;
+
+    console.log(`X users inserted;`, res);
+  })
+
   dbo.collection("users").find({}).toArray(function(err, result) {
     if (err || !result) throw err;
     console.log(result[0]);
