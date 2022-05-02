@@ -19,8 +19,9 @@ MongoClient.connect(url, function(err, db) {
 
   dbo.collection("users").find({}).toArray(function(err, result) {
     if (err || !result) throw err;
-    console.log(result[0]);
+    console.log(`there are ${result.length} users in the database`);
     const user = result[0];
+    
     console.log('user is: ', JSON.stringify(user));
     const items = [];
     for (let i = 0; i < 100; i++) {
