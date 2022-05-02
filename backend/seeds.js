@@ -7,7 +7,7 @@ MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   const dbo = db.db("admin");
   const users = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 100; i++) {
     const dummyUser = { "role": "user", "username": "iamdror" + randomString(), "email": `iamdror+${randomString()}@gmail.com`, }
     users.push(dummyUser);
   }
