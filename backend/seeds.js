@@ -6,7 +6,7 @@ const NUM_ITEMS = 10;
 const MongoClient = require('mongodb').MongoClient;
 
 const url = process.env.NODE_ENV === 'development' && process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/';
-const dbName = process.env.NODE_ENV === 'development' && 'admin' || 'anythink-market';
+const dbName = 'anythink-market';
 MongoClient.connect(url, async (err, db) => {
   if (err) throw err;
   console.log('Mongo Connection:', url);
