@@ -6,6 +6,7 @@ const MongoClient = require('mongodb').MongoClient;
 const dbName = 'anythink-market';
 const NUM_USERS = 100;
 const NUM_ITEMS = 100;
+const NUM_COMMENTS = 100;
 const url = process.env.NODE_ENV === 'development' && process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/';
 
 // const { MongoClient } = require("mongodb");
@@ -54,12 +55,23 @@ MongoClient.connect(url, async (err, db) => {
       }
       await dbo.collection("items").insertMany(items, async (err, res) => {
         if (err) throw err;
-        console.log(`${items.length} document inserted; \n`, res.acknowledged, res.insertedCount);
+        console.log(`${items.length} items inserted; \n`, res.acknowledged, res.insertedCount);
         
-        console.log('Closing connectio; that was fun;');
+        const comments = [];
+        for (let i = 0; i < NUM_COMMENTS; i++) {
+          const comment = {body: "comment!!!! " + randomString()};
+          comments.push(comment);
+        }
+
+        await dbo.collection("comments").insertMany(comments, async (err, res) => {
+          
+          console.log(`${comments.length} comments inserted; \n`, res.acknowledged, res.insertedCount);
+          
+          console.log('Closing connectio; that was fun;');
+          db.close();
+        });
   
   
-        db.close();
       });
   })
 
