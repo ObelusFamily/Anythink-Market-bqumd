@@ -1,12 +1,32 @@
 function randomString() {
   return Math.random().toString(36).substring(2, 5) + Math.random().toString(36).substring(2, 5);
 }
-const NUM_USERS = 100;
-const NUM_ITEMS = 10;
-const MongoClient = require('mongodb').MongoClient;
 
-const url = process.env.NODE_ENV === 'development' && process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/';
+const MongoClient = require('mongodb').MongoClient;
 const dbName = 'anythink-market';
+const NUM_USERS = 100;
+const NUM_ITEMS = 100;
+const url = process.env.NODE_ENV === 'development' && process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/';
+
+// const { MongoClient } = require("mongodb");
+// const uri = process.env.NODE_ENV === 'development' && process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/';
+// const client = new MongoClient(uri);
+
+// async function run() {
+//   try {
+//     await client.connect();
+//     const database = client.db(dbName);
+//     const users = database.collection('users');
+//     const allUsers = await users.find().toArray();
+//     console.log(allUsers);
+//   } finally {
+//     // Ensures that the client will close when you finish/error
+//     await client.close();
+//   }
+// }
+// run().catch(console.dir);
+
+
 MongoClient.connect(url, async (err, db) => {
   if (err) throw err;
   console.log('Mongo Connection:', url);
