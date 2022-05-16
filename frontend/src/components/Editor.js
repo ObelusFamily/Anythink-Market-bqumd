@@ -24,11 +24,9 @@ const mapDispatchToProps = (dispatch) => ({
   onUpdateField: (key, value) =>
     dispatch({ type: UPDATE_FIELD_EDITOR, key, value }),
 });
-
 class Editor extends React.Component {
   constructor() {
     super();
-
     const updateFieldEvent = (key) => (ev) =>
       this.props.onUpdateField(key, ev.target.value);
     this.changeTitle = updateFieldEvent("title");
