@@ -3,29 +3,12 @@ function randomString() {
 }
 
 const MongoClient = require('mongodb').MongoClient;
-const dbName = 'anythink-market';
-const NUM_USERS = 100;
-const NUM_ITEMS = 100;
-const NUM_COMMENTS = 100;
+const dbName = process.env.NODE_ENV === 'development' && 'anythink-market' || 'admin';
+console.log('Connecting to mongo', process.env.NODE_ENV, dbName);
+const NUM_USERS = process.env.NODE_ENV === 'development' && 100 || 1;
+const NUM_ITEMS = process.env.NODE_ENV === 'development' && 100 || 1;
+const NUM_COMMENTS = process.env.NODE_ENV === 'development' && 100 || 1;
 const url = process.env.NODE_ENV === 'development' && process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/';
-
-// const { MongoClient } = require("mongodb");
-// const uri = process.env.NODE_ENV === 'development' && process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/';
-// const client = new MongoClient(uri);
-
-// async function run() {
-//   try {
-//     await client.connect();
-//     const database = client.db(dbName);
-//     const users = database.collection('users');
-//     const allUsers = await users.find().toArray();
-//     console.log(allUsers);
-//   } finally {
-//     // Ensures that the client will close when you finish/error
-//     await client.close();
-//   }
-// }
-// run().catch(console.dir);
 
 
 MongoClient.connect(url, async (err, db) => {
@@ -50,7 +33,7 @@ MongoClient.connect(url, async (err, db) => {
       console.log('user is: ', JSON.stringify(user));
       const items = [];
       for (let i = 0; i < NUM_ITEMS; i++) {
-        const item = {"title":"title" + randomString(),"description":"description" + randomString(),"image":`https://i.picsum.photos/id/383/200/301.jpg?hmac=TGwwM8PMWk_qJx0gBlfMpy-jSI-Vswo8thS1eH1CEwg`,"tagList":[],"favorited":false,"favoritesCount":0,"seller":user && user._id || randomString(),"slug":randomString()}
+        const item = {"title":"title" + randomString(),"description":"description" + randomString(),"image":"https://picsum.photos/id/0/5616/3744","tagList":[],"favorited":false,"favoritesCount":0,"seller":user && user._id || randomString(),"slug":randomString()}
         items.push(item);
       }
       await dbo.collection("items").insertMany(items, async (err, res) => {

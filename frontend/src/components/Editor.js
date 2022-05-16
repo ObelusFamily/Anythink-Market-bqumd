@@ -10,7 +10,7 @@ import {
   EDITOR_PAGE_UNLOADED,
   UPDATE_FIELD_EDITOR,
 } from "../constants/actionTypes";
-
+import images from '../imgs/images.json';
 const mapStateToProps = (state) => ({
   ...state.editor,
 });
@@ -24,11 +24,13 @@ const mapDispatchToProps = (dispatch) => ({
   onUpdateField: (key, value) =>
     dispatch({ type: UPDATE_FIELD_EDITOR, key, value }),
 });
-
+function randomIntFromInterval(min, max) { // min and max included 
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
 class Editor extends React.Component {
   constructor() {
     super();
-
+    const mockImage = images[randomIntFromInterval(0, images.length - 1)];
     const updateFieldEvent = (key) => (ev) =>
       this.props.onUpdateField(key, ev.target.value);
     this.changeTitle = updateFieldEvent("title");
@@ -52,7 +54,7 @@ class Editor extends React.Component {
       const item = {
         title: this.props.title,
         description: this.props.description,
-        image: this.props.image,
+        image: this.props.image || mockImage.download_url,
         tagList: this.props.tagList,
       };
 
