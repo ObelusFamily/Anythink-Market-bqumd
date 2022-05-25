@@ -62,9 +62,6 @@ body {
   min-width: 800px;
 }
 @media only screen and (max-width: 768px) {
-  #root {
-    max-width: 400px;
-  }
   .user-info {
     min-width: unset;
   }
