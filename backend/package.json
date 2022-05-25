@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "node ./app.js",
-    "start:dev": "PORT=3000 NODE_ENV=development MONGODB_URI=mongodb://127.0.0.1:27017 node ./app.js",
+    "start:dev": "PORT=3000 NODE_ENV=development MONGODB_URI=mongodb://127.0.0.1:27017/anythink-market node ./app.js",
     "dev": "nodemon ./app.js",
     "seeds": "node seeds.js",
     "test": "newman run ./tests/api-tests.postman.json -e ./tests/env-api-tests.postman.json",

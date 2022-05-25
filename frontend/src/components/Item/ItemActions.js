@@ -20,11 +20,11 @@ const ItemActions = (props) => {
           to={`/editor/${item.slug}`}
           className="btn btn-outline-dark btn-sm mr-2"
         >
-          <i className="ion-edit"></i> Edit Item
+          <i className="ion-edit"></i> <span>Edit Item</span>
         </Link>
 
         <button className="btn btn-outline-danger btn-sm" onClick={del}>
-          <i className="ion-trash-a"></i> Delete Item
+          <i className="ion-trash-a"></i> <span>Delete Item</span>
         </button>
       </span>
     );

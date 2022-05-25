@@ -3,12 +3,12 @@ function randomString() {
 }
 
 const MongoClient = require('mongodb').MongoClient;
-const dbName = process.env.NODE_ENV === 'development' && 'anythink-market' || 'admin';
+const dbName = process.env.NODE_ENV === 'development' && 'anythink-market' || 'anythink-market';
 console.log('Connecting to mongo', process.env.NODE_ENV, dbName);
 const NUM_USERS = process.env.NODE_ENV === 'development' && 100 || 1;
 const NUM_ITEMS = process.env.NODE_ENV === 'development' && 100 || 1;
 const NUM_COMMENTS = process.env.NODE_ENV === 'development' && 100 || 1;
-const url = process.env.NODE_ENV === 'development' && process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/';
+const url = process.env.NODE_ENV === 'development' && process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/anythink-market';
 
 
 MongoClient.connect(url, async (err, db) => {
